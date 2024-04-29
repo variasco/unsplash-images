@@ -4,6 +4,7 @@ import {
   ImageStateProvider,
 } from "@entities/image";
 import { SearchImages } from "@features/search-images";
+import { ViewImage } from "@features/view-image";
 import { Stack } from "@mui/system";
 import { useState } from "react";
 import "./styles/global.css";
@@ -19,7 +20,7 @@ function App() {
             sx={{ paddingTop: searchStarted ? undefined : "232px" }}
             setSearchStarted={setSearchStarted}
           />
-          {searchStarted && <ImageList />}
+          {searchStarted && <ImageList ViewImageFeature={ViewImage} />}
         </Stack>
       </ImageStateProvider>
     </ImageQueryProvider>

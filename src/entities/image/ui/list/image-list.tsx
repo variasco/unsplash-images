@@ -7,8 +7,15 @@ import { useInView } from "react-intersection-observer";
 import fetchImages from "../../api/fetch-images";
 import { useSearchState } from "../../model/contexts/image-query-state.context";
 import ImageListItem from "../list-item/image-list-item";
+import { ViewImageProps } from "@features/view-image";
 
-export default function ImageList() {
+type ImageListProps = {
+  ViewImageFeature: React.FC<ViewImageProps>;
+};
+
+export default function ImageList(props: ImageListProps) {
+  const { ViewImageFeature } = props;
+
   const search = useSearchState();
 
   const { ref, inView } = useInView();
@@ -38,7 +45,10 @@ export default function ImageList() {
         {data?.pages.flatMap((page) =>
           page.results.map((image) => (
             <Grid xs={4} key={image.id}>
-              <ImageListItem image={image} />
+              <ImageListItem
+                image={image}
+                ViewImageFeature={ViewImageFeature}
+              />
             </Grid>
           ))
         )}

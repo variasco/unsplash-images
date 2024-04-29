@@ -5,4 +5,5 @@ export const text = {
   main: "#000000",
   disabled: "#9C9C9C",
   inverted: "#FFFFFF",
+  grey: "#787878",
 };

@@ -8,6 +8,7 @@ import fetchImages from "../../api/fetch-images";
 import { useSearchState } from "../../model/contexts/image-query-state.context";
 import ImageListItem from "../list-item/image-list-item";
 import { ViewImageProps } from "@features/view-image";
+import { text } from "@shared/theme/colors";
 
 type ImageListProps = {
   ViewImageFeature: React.FC<ViewImageProps>;
@@ -37,6 +38,25 @@ export default function ImageList(props: ImageListProps) {
 
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (!data?.pages[0].total) {
+    return (
+      <Box
+        p={2}
+        component="p"
+        sx={{
+          fontFamily: '"SF Pro Display", sans-serif',
+          fontWeight: 400,
+          fontSize: 16,
+          lineHeight: 1.2,
+          color: text.grey,
+          textWrap: "nowrap",
+        }}
+      >
+        К сожалению, поиск не дал результатов
+      </Box>
+    );
   }
 
   return (

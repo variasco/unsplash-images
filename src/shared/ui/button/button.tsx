@@ -2,8 +2,10 @@ import { Button as BaseButton, buttonClasses } from "@mui/base/Button";
 import { styled } from "@mui/system";
 import { primary, text } from "@shared/theme/colors";
 
-export default function Button(props: React.PropsWithChildren) {
-  return <StyledButton>{props.children}</StyledButton>;
+export default function Button(
+  props: React.PropsWithChildren<{ onClick?: () => void }>
+) {
+  return <StyledButton onClick={props.onClick}>{props.children}</StyledButton>;
 }
 
 const StyledButton = styled(BaseButton)`

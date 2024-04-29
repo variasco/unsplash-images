@@ -1,27 +1,28 @@
+import {
+  ImageList,
+  ImageQueryProvider,
+  ImageStateProvider,
+} from "@entities/image";
+import { SearchImages } from "@features/search-images";
 import { Stack } from "@mui/system";
-import { Button, Input } from "@shared/ui";
 import { useState } from "react";
+import "./styles/global.css";
 
 function App() {
-  const [value, setValue] = useState("");
+  const [searchStarted, setSearchStarted] = useState(false);
 
   return (
-    <>
-      <Stack
-        direction="row"
-        spacing={1}
-        alignItems="center"
-        sx={{ boxSizing: "border-box" }}
-      >
-        <Input
-          style={{ flex: 1 }}
-          placeholder="Телефоны, яблоки, груши..."
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-        />
-        <Button>I am button</Button>
-      </Stack>
-    </>
+    <ImageQueryProvider>
+      <ImageStateProvider>
+        <Stack height="100vh" sx={{ overflowX: "hidden" }}>
+          <SearchImages
+            sx={{ paddingTop: searchStarted ? undefined : "232px" }}
+            setSearchStarted={setSearchStarted}
+          />
+          {searchStarted && <ImageList />}
+        </Stack>
+      </ImageStateProvider>
+    </ImageQueryProvider>
   );
 }
 

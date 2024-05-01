@@ -1,11 +1,19 @@
-import { Button as BaseButton, buttonClasses } from "@mui/base/Button";
-import { styled } from "@mui/system";
+import { PolymorphicProps } from "@mui/base";
+import {
+  Button as BaseButton,
+  ButtonTypeMap,
+  buttonClasses,
+} from "@mui/base/Button";
+import { MUIStyledCommonProps, Theme, styled } from "@mui/system";
 import { primary, text } from "@shared/theme/colors";
 
-export default function Button(
-  props: React.PropsWithChildren<{ onClick?: () => void }>
-) {
-  return <StyledButton onClick={props.onClick}>{props.children}</StyledButton>;
+type ButtonProps = PolymorphicProps<ButtonTypeMap, "button"> &
+  MUIStyledCommonProps<Theme>;
+
+export default function Button(props: ButtonProps) {
+  const { children } = props;
+
+  return <StyledButton {...props}>{children}</StyledButton>;
 }
 
 const StyledButton = styled(BaseButton)`

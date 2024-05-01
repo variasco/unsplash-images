@@ -1,17 +1,17 @@
 import { useSetSearchState } from "@entities/image";
-import { Stack, SxProps, Theme } from "@mui/system";
+import { PolymorphicProps } from "@mui/base";
+import { Stack, StackTypeMap } from "@mui/system";
 import closeIcon from "@shared/assets/svg/close.svg";
 import searchIcon from "@shared/assets/svg/search.svg";
 import { Button, IconButton, Input } from "@shared/ui";
 import { useState } from "react";
 
-interface SearchImagesProps {
+interface SearchImagesProps extends PolymorphicProps<StackTypeMap, "div"> {
   setSearchStarted: React.Dispatch<React.SetStateAction<boolean>>;
-  sx?: SxProps<Theme>;
 }
 
 export default function SearchImages(props: SearchImagesProps) {
-  const { setSearchStarted, sx } = props;
+  const { setSearchStarted, ...other } = props;
 
   const [state, setState] = useState("");
   const setSearch = useSetSearchState();
@@ -35,7 +35,7 @@ export default function SearchImages(props: SearchImagesProps) {
   };
 
   return (
-    <Stack sx={sx} direction="row" spacing={1} p={2}>
+    <Stack direction="row" spacing={1} p={2} {...other}>
       <Input
         startAdornment={<img src={searchIcon} alt="" />}
         endAdornment={
